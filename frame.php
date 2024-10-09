@@ -1,5 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frame Price Estimator</title>
+</head>
+<body>
+
+
+<h1>Frame Price Estimator</h1>
+<p>Please enter your photo sizes to get a framing cost estimate</p>
 
 <?php
+$emailErr = $widthErr = $heightErr = " ";
+
 $email = isset($_POST['email'])? $_POST['email'] : " ";
 $width = isset($_POST['width'])? $_POST['width'] : " ";
 $height = isset($_POST['height'])? $_POST['height'] : " ";
@@ -55,6 +68,27 @@ if($width !== " " && $height !== " "){
     }
 }
 ?>
+
+
+<form action="" method="post">
+    Email: <input type="email" name="email" ><br>
+    Photo Width: <input type="number" name="width">
+    <select name="units" >
+        <option value="mm" > mm<br>
+        <option value="cm"> cm <br>
+        <option value="inch"> inch <br>
+    </select> <br>
+    Photo Height: <input type="number" name="height"><br>
+    Postage: <input type="radio" name="postage" value="E" checked> Economy
+    <input type="radio" name="postage" value="R"> Rapid
+    <input type="radio" name="postage" value="ND"> Next Day<br>
+    <input type="checkbox" name="inclVat" value="VAT"> Include VAT in price<br>
+    <input type="submit">
+</form>
+
+</body>
+</html>
+
 
 
 
