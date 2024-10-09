@@ -22,7 +22,7 @@ if($width !== " " && $height !== " "){
 }
 ?>
 
-<form action="frame.php" method="post">
+<form action="" method="post">
     Photo Width: <input type="number" name="width"><br>
     Photo Height: <input type="number" name="height"><br>
     <input type="submit">
