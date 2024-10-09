@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Frame Price Estimator</title>
-</head>
-<body>
-
-
-<h1>Frame Price Estimator</h1>
-<p>Please enter your photo sizes to get a framing cost estimate</p>
 
 <?php
+$email = isset($_POST['email'])? $_POST['email'] : " ";
 $width = isset($_POST['width'])? $_POST['width'] : " ";
 $height = isset($_POST['height'])? $_POST['height'] : " ";
 $unit = isset($_POST['units'])? $_POST['units'] : " ";
@@ -48,35 +38,23 @@ if($width !== " " && $height !== " "){
 
     $Price = round((($A * $A) + (70 * $A) + 7),2);
 
+    $thankYou = "Thank you for using the Frame price estimator. You can place an order at this link: https://devweb2024.cis.strath.ac.uk/~tjb22146/index.html .\n";
 
     if($vat){
         $totalPrice = $Price + $postagePrice;
         $vatPrice = round($totalPrice * 0.2, 2);
         $totalPrice = $totalPrice + $vatPrice;
-        echo("<p>Your frame will cost £$Price plus $postageType postage of £$postagePrice giving a total price of £$totalPrice including VAT.</p>\n");
+        $message1 = "Your frame will cost £$Price plus $postageType postage of £$postagePrice giving a total price of £$totalPrice including VAT.\n";
+        echo("<p>$message1</p>\n");
+        mail($email, "Frame Cost", $message1 . $thankYou);
     }else{
         $totalPrice = $Price + $postagePrice;
-        echo("<p>Your frame will cost £$Price plus $postageType postage of £$postagePrice giving a total price of £$totalPrice.</p>\n");
+        $message1 = "Your frame will cost £$Price plus $postageType postage of £$postagePrice giving a total price of £$totalPrice .\n";
+        echo("<p>$message1</p>\n");
+        mail($email, "Frame Cost", $message1 . $thankYou);
     }
 }
 ?>
 
-<form action="" method="post">
-    Photo Width: <input type="number" name="width">
-    <select name="units" >
-        <option value="mm" > mm<br>
-        <option value="cm"> cm <br>
-        <option value="inch"> inch <br>
-    </select> <br>
-    Photo Height: <input type="number" name="height"><br>
-    Postage: <input type="radio" name="postage" value="E" checked> Economy
-    <input type="radio" name="postage" value="R"> Rapid
-    <input type="radio" name="postage" value="ND"> Next Day<br>
-    <input type="checkbox" name="inclVat" value="VAT"> Include VAT in price<br>
-    <input type="submit">
-</form>
-
-</body>
-</html>
 
 
