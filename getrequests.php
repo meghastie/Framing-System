@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }
 
 //get all orders to display
-$sql = "SELECT * FROM `tjb22146`.`framingSystem`";
+$sql = "SELECT * FROM `tjb22146`.`framingSystem` ORDER BY STR_TO_DATE(`Requested`, '%d/%m/%Y - %H:%i') DESC";
 $result = $conn->query($sql);
 if ($result === FALSE) {
     die ("Error: " . $sql . "<br>" . $conn->error);//FIXME only use during debugging

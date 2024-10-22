@@ -35,7 +35,7 @@ if ((empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) && $receiveMai
 }
 
 //width and height must be entered. they must both be between the equivalent 0.2 or 2.0 m
-if (empty($width) || empty($height)) {
+if (empty($width) || empty($height) || !is_numeric($width) || !is_numeric($height)) {
     $isFormValid = false;
 }else{
     switch ($unit) {
@@ -65,8 +65,8 @@ if (empty($width) || empty($height)) {
 
 //form is valid, so we can continue with processing it
 if ($isFormValid) {
-    $width = $width / $divideByVal;
-    $height = $height / $divideByVal;
+    $width = round(($width / $divideByVal ), 2);
+    $height = round(($height / $divideByVal),2);
     $A = $width * $height; //find the area in m^2
 
     //Postage is based on the longest edge L = max (width, height) , in meters. Economy postage costs 2L+7 pounds while rapid costs 3L+7 and next-day costs 4L+10. Default should be economy.
@@ -127,7 +127,7 @@ if ($isFormValid) {
 
 
 
-    if (empty($width) || empty($height)) {
+    if (empty($width) || empty($height) || !is_numeric($width) || !is_numeric($height)) {
         echo "Error - Both width and height is required. Please try again.\n";?> <br> <?php
     }
     ?>
